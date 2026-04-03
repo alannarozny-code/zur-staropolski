@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Żur Staropolski — Przepis Ultra</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --dark: #1a1410;
+    --brown: #6b3f1a;
+    --amber: #c4832a;
+    --rust: #8b3a1f;
+    --muted: #7a6e62;
+    --line: #d9cfc4;
+    --card: #faf7f2;
+    --green: #2d5016;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(196,131,42,0.2);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -20px;
+    width: 150px; height: 150px;
+    border: 1px solid rgba(196,131,42,0.15);
+    border-radius: 50%;
+  }
+  .header-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 em {
+    color: var(--amber);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.6);
+    max-width: 340px;
+    margin-top: 0.75rem;
+  }
+  .header-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .meta-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+  }
+  .meta-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+  }
+
+  /* NAV TABS */
+  .nav-tabs {
+    display: flex;
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    flex: 1;
+    min-width: 90px;
+    padding: 0.85rem 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(245,240,232,0.45);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-tab.active {
+    color: var(--amber);
+    border-bottom: 2px solid var(--amber);
+  }
+
+  /* SECTIONS */
+  .section { display: none; padding: 1.5rem; }
+  .section.active { display: block; }
+
+  /* SERVINGS CONTROL */
+  .servings-bar {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .servings-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .servings-control {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .btn-serving {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--brown);
+    background: none;
+    color: var(--brown);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-serving:active { background: var(--brown); color: white; }
+  .servings-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    min-width: 2rem;
+    text-align: center;
+    color: var(--dark);
+  }
+
+  /* UNIT TOGGLE */
+  .unit-toggle {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .unit-btn {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .unit-btn.active {
+    background: var(--brown);
+    color: white;
+    border-color: var(--brown);
+  }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* SUBSECTION */
+  .subsection {
+    margin-bottom: 2rem;
+  }
+  .subsection-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* INGREDIENT LIST */
+  .ingredient-list {
+    list-style: none;
+  }
+  .ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+    gap: 1rem;
+  }
+  .ingredient-item:last-child { border-bottom: none; }
+  .ing-name {
+    font-size: 0.9rem;
+    color: var(--dark);
+    flex: 1;
+  }
+  .ing-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .ing-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--brown);
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  /* INFO BOX */
+  .info-box {
+    background: var(--card);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--dark);
+  }
+  .info-box strong {
+    font-weight: 500;
+    color: var(--brown);
+  }
+  .info-box p + p { margin-top: 0.5rem; }
+
+  .warning-box {
+    background: #fef8f0;
+    border-left: 3px solid var(--rust);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--dark);
+  }
+  .warning-box strong { color: var(--rust); }
+
+  .science-box {
+    background: #f0f4f0;
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: #2a3a20;
+  }
+  .science-box strong { color: var(--green); font-weight: 500; }
+
+  /* STEPS (COOKING MODE) */
+  .step-progress {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .step-dot {
+    flex: 1;
+    min-width: 8px;
+    max-width: 24px;
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .step-dot.done { background: var(--amber); }
+  .step-dot.current { background: var(--brown); }
+
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .step-header {
+    background: var(--dark);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--amber);
+    line-height: 1;
+    min-width: 2rem;
+  }
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+  .step-body {
+    padding: 1.25rem;
+  }
+  .step-text {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--dark);
+  }
+  .step-text .highlight {
+    background: rgba(196,131,42,0.12);
+    color: var(--brown);
+    padding: 0 3px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* TIMER */
+  .timer-block {
+    margin-top: 1rem;
+    background: var(--dark);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .timer-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+  }
+  .timer-label {
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .timer-btn {
+    padding: 0.5rem 1rem;
+    background: var(--amber);
+    color: var(--dark);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* NAVIGATION BUTTONS */
+  .step-nav {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+  .btn-nav {
+    flex: 1;
+    padding: 0.9rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    border: none;
+    transition: all 0.15s;
+  }
+  .btn-prev {
+    background: var(--card);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .btn-next {
+    background: var(--dark);
+    color: var(--cream);
+  }
+  .btn-next:active { background: var(--brown); }
+  .btn-next.finish { background: var(--green); }
+
+  /* START COOKING */
+  .start-cooking-btn {
+    width: 100%;
+    padding: 1.1rem;
+    background: var(--brown);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 1.5rem;
+    transition: background 0.2s;
+  }
+  .start-cooking-btn:active { background: var(--rust); }
+
+  /* NOTES / SCIENCE SECTION */
+  .note-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .note-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--brown);
+  }
+  .note-card p {
+    font-size: 0.86rem;
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  /* COMPLETION */
+  .completion {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  .completion-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  .completion h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .completion p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  /* STEP OVERVIEW LIST */
+  .steps-overview {
+    list-style: none;
+  }
+  .step-overview-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: flex-start;
+    cursor: pointer;
+  }
+  .step-overview-item:last-child { border-bottom: none; }
+  .step-overview-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--amber);
+    min-width: 1.5rem;
+    font-weight: 700;
+  }
+  .step-overview-title {
+    font-size: 0.87rem;
+    color: var(--dark);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .step-overview-time {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 1.5rem 0;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: rgba(107,63,26,0.1);
+    color: var(--brown);
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 600px) {
+    .header h1 { font-size: 2.8rem; }
+    .section { padding: 2rem; max-width: 640px; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Przepis Ultra · Tradycja Staropolska</div>
+  <h1>Żur<br><em>Staropolski</em></h1>
+  <p class="header-sub">Wersja maksymalnie esencjonalna — wywar na pieczonych wędzonych kościach, leśne grzyby, bez śmietany. Wzorowana na tradycji śląsko-staropolskiej.</p>
+  <div class="header-meta">
+    <div class="meta-item">
+      <span class="meta-label">Czas aktywny</span>
+      <span class="meta-value">~1h</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Czas całkowity</span>
+      <span class="meta-value">~3h + zakwas</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Porcje</span>
+      <span class="meta-value" id="header-servings">6 osób</span>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('zakwas')">Zakwas</button>
+  <button class="nav-tab" onclick="showSection('skladniki')">Składniki</button>
+  <button class="nav-tab" onclick="showSection('kroki')">Kroki</button>
+  <button class="nav-tab" onclick="showSection('gotowanie')">Get Cooking</button>
+  <button class="nav-tab" onclick="showSection('nauka')">Dlaczego?</button>
+</nav>
+
+<!-- ===== ZAKWAS ===== -->
+<section class="section active" id="section-zakwas">
+  <div class="info-box">
+    <strong>Nastawić 5–7 dni wcześniej.</strong> Zakwas to dusza żurku — bez dobrego zakwasu nie ma dobrego żurku. Warto mieć go stale w lodówce.
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-label">Składniki na zakwas (~600 ml)</div>
+    <ul class="ingredient-list">
+      <li class="ingredient-item">
+        <span class="ing-name">Mąka żytnia razowa <span class="ing-note">koniecznie typ 2000</span></span>
+        <span class="ing-amount">200 g</span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Woda przegotowana, przestudzona <span class="ing-note">do ~30°C</span></span>
+        <span class="ing-amount">600 ml</span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Czosnek <span class="ing-note">dodać dopiero po 2–3 dniach!</span></span>
+        <span class="ing-amount">4 ząbki</span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Liście laurowe <span class="ing-note">dodać po 2–3 dniach</span></span>
+        <span class="ing-amount">3 szt.</span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Ziele angielskie <span class="ing-note">dodać po 2–3 dniach</span></span>
+        <span class="ing-amount">6 ziaren</span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Pieprz czarny ziarnisty <span class="ing-note">dodać po 2–3 dniach</span></span>
+        <span class="ing-amount">6 ziaren</span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Skórka chleba żytniego na zakwasie <span class="ing-note">opcjonalny starter — przyspiesza</span></span>
+        <span class="ing-amount">1 szt.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-label">Przygotowanie krok po kroku</div>
+
+    <div class="note-card">
+      <h3>Dzień 1 — nastawienie</h3>
+      <p>W <strong>wyparzonym słoiku</strong> (min. 1,5 l) wymieszaj mąkę z wodą dokładnie, bez grudek. Jeśli masz skórkę chleba żytniego — wrzuć ją teraz. Przyspieszy fermentację o 1–2 dni przez wprowadzenie gotowych kultur bakterii. Przykryj <strong>gazą lub ściereczką</strong> — nie folią! Zakwas musi oddychać. Postaw w ciepłym miejscu 22–26°C. Mieszaj 2 razy dziennie drewnianą łyżką.</p>
+    </div>
+
+    <div class="note-card">
+      <h3>Dzień 2–3 — obserwacja</h3>
+      <p>Zakwas zacznie pachnieć kwaśno i lekko musować — to naturalny znak fermentacji mlekowej. Na powierzchni może pojawić się jasna piana: normalne, zamieszaj. Jeśli pojawi się <strong>pleśń lub nieprzyjemny gnilny zapach</strong> — wyrzuć i zacznij od nowa.</p>
+    </div>
+
+    <div class="warning-box">
+      <strong>Ważne:</strong> Czosnek <em>celowo</em> dodajesz dopiero po ustabilizowaniu fermentacji. Jego siła antybakteryjna może zakłócić prawidłowy rozwój bakterii kwasu mlekowego.
+    </div>
+
+    <div class="note-card">
+      <h3>Dzień 3 — dodanie przypraw</h3>
+      <p>Gdy fermentacja jest ustabilizowana, dodaj czosnek (lekko rozgnieciony), liście laurowe, ziele angielskie i pieprz. Zamieszaj i odstaw dalej.</p>
+    </div>
+
+    <div class="note-card">
+      <h3>Dzień 5–7 — gotowość</h3>
+      <p>Zakwas gotowy gdy: intensywnie i głęboko pachnie kwaśno-chlebowo, ma wyraźnie kwaśny smak na języku, mąka z dna miesza się jednolicie. Wylej do butelki, przechowuj w lodówce do 2 tygodni. Przed użyciem wyjmij 2 godziny wcześniej i mocno wstrząśnij — mąka opada na dno i to właśnie ona zagęszcza zupę.</p>
+    </div>
+  </div>
+
+  <div class="science-box">
+    <strong>Skrót dla posiadaczy zakwasu chlebowego:</strong> Masz zakwas żytni do chleba? Dodaj 3 łyżki zamiast skórki chleba — zakwas będzie gotowy już po 3 dniach. To dokładnie te same kultury bakterii.
+  </div>
+</section>
+
+<!-- ===== SKŁADNIKI ===== -->
+<section class="section" id="section-skladniki">
+  <div class="servings-bar">
+    <div>
+      <div class="servings-label">Porcje</div>
+      <div class="servings-control">
+        <button class="btn-serving" onclick="changeServings(-1)">−</button>
+        <div class="servings-num" id="servings-display">6</div>
+        <button class="btn-serving" onclick="changeServings(1)">+</button>
+      </div>
+    </div>
+    <div>
+      <div class="servings-label">Jednostki</div>
+      <div class="unit-toggle">
+        <button class="unit-btn active" onclick="setUnit('metric', this)">SI</button>
+        <button class="unit-btn" onclick="setUnit('imperial', this)">UK/US</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-label">🔥 Baza wywaru — wędzonki</div>
+    <ul class="ingredient-list">
+      <li class="ingredient-item">
+        <span class="ing-name">Wędzone żeberka lub kości wieprzowe wędzone <span class="ing-note">pieczone przed gotowaniem — kluczowy krok</span></span>
+        <span class="ing-amount" data-base="600" data-unit="g"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Boczek wędzony <span class="ing-note">cały kawałek, nie plastry</span></span>
+        <span class="ing-amount" data-base="300" data-unit="g"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Biała kiełbasa surowa <span class="ing-note">najlepsza od rzeźnika</span></span>
+        <span class="ing-amount" data-base="400" data-unit="g"></span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-label">🍄 Grzyby i warzywa</div>
+    <ul class="ingredient-list">
+      <li class="ingredient-item">
+        <span class="ing-name">Suszone grzyby leśne <span class="ing-note">borowiki lub podgrzybki — nie pieczarki</span></span>
+        <span class="ing-amount" data-base="25" data-unit="g"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Marchewka</span>
+        <span class="ing-amount" data-base="1" data-unit="szt."></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Korzeń pietruszki</span>
+        <span class="ing-amount" data-base="1" data-unit="szt."></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Mały seler (korzeń)</span>
+        <span class="ing-amount" data-base="0.5" data-unit="szt."></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Por <span class="ing-note">biała część</span></span>
+        <span class="ing-amount" data-base="1" data-unit="szt."></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Cebula <span class="ing-note">jedna do opalenia, jedna do zupy</span></span>
+        <span class="ing-amount" data-base="2" data-unit="szt."></span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-label">🌿 Przyprawy i zakwas</div>
+    <ul class="ingredient-list">
+      <li class="ingredient-item">
+        <span class="ing-name">Zakwas żytni <span class="ing-note">mocny, domowy — dodawaj partiami</span></span>
+        <span class="ing-amount" data-base="500" data-unit="ml"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Czosnek <span class="ing-note">do zupy, dodany na końcu — nie do zakwasu</span></span>
+        <span class="ing-amount" data-base="5" data-unit="ząbków"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Liście laurowe</span>
+        <span class="ing-amount" data-base="3" data-unit="szt."></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Ziele angielskie</span>
+        <span class="ing-amount" data-base="6" data-unit="ziaren"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Pieprz czarny ziarnisty</span>
+        <span class="ing-amount" data-base="8" data-unit="ziaren"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Chrzan tarty <span class="ing-note">świeży lub dobrej jakości ze słoika — podany przy stole</span></span>
+        <span class="ing-amount" data-base="2" data-unit="łyżki"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Majeranek suszony <span class="ing-note">rozetrzeć w dłoniach przed dodaniem</span></span>
+        <span class="ing-amount" data-base="2" data-unit="łyżeczki"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Smalec <span class="ing-note">do podsmażenia cebuli</span></span>
+        <span class="ing-amount" data-base="1" data-unit="łyżka"></span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-label">🥚 Do podania</div>
+    <ul class="ingredient-list">
+      <li class="ingredient-item">
+        <span class="ing-name">Jajka <span class="ing-note">ugotowane na twardo lub półtwardo — osobno</span></span>
+        <span class="ing-amount" data-base="6" data-unit="szt."></span>
+      </li>
+    </ul>
+  </div>
+
+  <button class="start-cooking-btn" onclick="startCooking()">→ Zacznij gotować</button>
+</section>
+
+<!-- ===== KROKI (OVERVIEW) ===== -->
+<section class="section" id="section-kroki">
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.25rem;">Przegląd wszystkich etapów. Kliknij krok aby przejść bezpośrednio do niego w trybie gotowania.</p>
+
+  <div class="subsection-label" style="margin-bottom:0.75rem;">Czas łączny: ~3 godziny aktywne</div>
+
+  <ul class="steps-overview">
+    <li class="step-overview-item" onclick="goToStep(0)">
+      <span class="step-overview-num">1</span>
+      <div>
+        <div class="step-overview-title">Pieczenie wędzonki — sekret głębokiego smaku</div>
+        <div class="step-overview-time">⏱ 30 minut · 220°C</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(1)">
+      <span class="step-overview-num">2</span>
+      <div>
+        <div class="step-overview-title">Namaczanie grzybów</div>
+        <div class="step-overview-time">⏱ min. 2 godziny (najlepiej noc)</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(2)">
+      <span class="step-overview-num">3</span>
+      <div>
+        <div class="step-overview-title">Opalenie cebuli</div>
+        <div class="step-overview-time">⏱ 5 minut</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(3)">
+      <span class="step-overview-num">4</span>
+      <div>
+        <div class="step-overview-title">Gotowanie wywaru bazowego</div>
+        <div class="step-overview-time">⏱ 90 minut (minimum)</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(4)">
+      <span class="step-overview-num">5</span>
+      <div>
+        <div class="step-overview-title">Odcedzenie i podsmażenie</div>
+        <div class="step-overview-time">⏱ 10 minut</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(5)">
+      <span class="step-overview-num">6</span>
+      <div>
+        <div class="step-overview-title">Gotowanie kiełbasy</div>
+        <div class="step-overview-time">⏱ 20 minut</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(6)">
+      <span class="step-overview-num">7</span>
+      <div>
+        <div class="step-overview-title">Zakwas — dodawaj partiami</div>
+        <div class="step-overview-time">⏱ 10 minut</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(7)">
+      <span class="step-overview-num">8</span>
+      <div>
+        <div class="step-overview-title">Czosnek i majeranek na końcu</div>
+        <div class="step-overview-time">⏱ 5 minut</div>
+      </div>
+    </li>
+    <li class="step-overview-item" onclick="goToStep(8)">
+      <span class="step-overview-num">9</span>
+      <div>
+        <div class="step-overview-title">Odpoczynek i podanie</div>
+        <div class="step-overview-time">⏱ 30 min / cała noc</div>
+      </div>
+    </li>
+  </ul>
+
+  <button class="start-cooking-btn" onclick="startCooking()">→ Zacznij gotować od początku</button>
+</section>
+
+<!-- ===== GET COOKING ===== -->
+<section class="section" id="section-gotowanie">
+  <div class="step-progress" id="step-progress"></div>
+  <div id="step-container"></div>
+</section>
+
+<!-- ===== NAUKA ===== -->
+<section class="section" id="section-nauka">
+  <div class="section-title">Dlaczego tak?</div>
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;">Każda decyzja w tym przepisie ma uzasadnienie. Oto nauka stojąca za każdym nieoczywistym krokiem.</p>
+
+  <div class="note-card">
+    <h3>🔥 Pieczenie kości przed gotowaniem</h3>
+    <p>Reakcja Maillarda zachodzi wyłącznie w wysokiej temperaturze na <em>suchej</em> powierzchni — w piekarniku, nie w wodzie. Pieczone kości i boczek oddają do wywaru związki aromatyczne (furanony, pirole, melanoidyny) których nie da się uzyskać przez samo gotowanie w wodzie. To jeden krok który zmienia zupę z dobrej na wybitną. Identyczna technika stosowana jest przy przygotowaniu ciemnych bulionów (fond brun) w kuchni klasycznej.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>🧄 Czosnek na końcu, nie na początku</h3>
+    <p>Lotne związki siarki allicyny — odpowiedzialne za ostrość i charakterystyczny aromat czosnku — rozpadają się podczas długiego gotowania. Czosnek dodany na początku i gotowany godzinę staje się łagodny i słodki. Dodany na zdejmowanym z ognia wywarze, zachowuje swoją pełną moc. To dlaczego w tym przepisie czosnek wchodzi jako ostatni.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>🌿 Majeranek rozcierany w dłoniach</h3>
+    <p>Suszone zioła mają olejki eteryczne zamknięte w wysuszonych komórkach. Mechaniczne rozcieranie między dłońmi dosłownie rozrywa te komórki i uwalnia aromat tuż przed dodaniem — zamiast czekać aż ciepło wody to powoli zrobi (nieefektywnie). To różnica między majerankiem żywym a "gotowanym".</p>
+  </div>
+
+  <div class="note-card">
+    <h3>🧅 Opalona cebula</h3>
+    <p>Zwęglona skórka cebuli wnosi do wywaru skarmelizowane cukry, gorzkie związki fenolowe i ciemny kolor. To tradycyjna technika kulinarna stosowana w każdym klasycznym bulionie mięsnym — ciemna cebula to ciemny, głęboki wywar. Bez niej żurek bywa bladawy i płaski w kolorze.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>🍄 Woda z moczenia grzybów</h3>
+    <p>Suszone grzyby oddają do wody podczas moczenia głęboki, leśny aromat — 1,8-cineol, geosminę, terpeny. Ta woda to esencja grzybowa w czystej postaci. Wylanie jej jest jak wyrzucenie połowy bulionu. Zawsze wchodzi do garnka razem z grzybami.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>🥄 Zakwas dodawany partiami</h3>
+    <p>Stężenie kwasu mlekowego i octowego w zakwasie różni się między partiami. Dodanie całego zakwasu naraz może sprawić, że zupa będzie nie do uratowania — za kwaśna. Partiami, próbując po każdej porcji, masz pełną kontrolę. Zahartowanie zakwasu ciepłym wywarem przed połączeniem zapobiega grudkom mąki żytniej.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>🌶 Chrzan przy stole, nie w garnku</h3>
+    <p>Izotiocyjaniany — związki odpowiedzialne za ostrość chrzanu — są termolabilne. Kilka minut gotowania praktycznie je eliminuje. Chrzan gotowany z zupą traci swoją charakterystyczną ostrość i zostaje tylko lekka goryczka. Podany świeżo na talerzu to zupełnie inny składnik. Część tradycji śląskiej nigdy nie gotuje chrzanu z żurem.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>🍶 Bez śmietany</h3>
+    <p>Śmietana jest emulsją tłuszczu i wody o pH ~4,5. Dodana do kwaśnego środowiska zakwasu łagodzi kwasowość przez rozcieńczenie i neutralizację. Innymi słowy: niszczy dokładnie to co w żurze najcenniejsze — jego charakterystyczny, głęboki smak fermentacyjny. Tradycja śląska i staropolska żuru postnego: bez śmietany. Chcesz łagodniejszy? Dodaj do własnego talerza.</p>
+  </div>
+
+  <div class="note-card">
+    <h3>⏰ Lepszy następnego dnia</h3>
+    <p>Przez noc w lodówce zachodzą dwa procesy: ekstrakcja — związki aromatyczne z wędzonki i grzybów dalej migrują do wywaru, oraz równoważenie — kwasowość zakwasu rozkłada się równomiernie w całej objętości. Żurek ugotowany wieczór wcześniej i odgrzany następnego dnia to inny poziom głębi smaku niż podany od razu.</p>
+  </div>
+</section>
+
+<script>
+// ===== DATA =====
+const STEPS = [
+  {
+    num: 1,
+    title: "Pieczenie wędzonki — sekret głębokiego smaku",
+    timer: 1800,
+    text: `Nagrzej piekarnik do <span class="highlight">220°C</span>. Ułóż wędzone żeberka i boczek na blasze <span class="highlight">bez tłuszczu</span> — wędliny mają go wystarczająco. Piecz 25–30 minut aż będą głęboko zrumienione.`,
+    science: `To najważniejszy krok całego przepisu. Reakcja Maillarda zachodzi wyłącznie na suchej powierzchni w wysokiej temperaturze — w piekarniku, nie w wodzie. Pieczone wędzonki oddadzą do wywaru związki aromatyczne (furanony, melanoidyny), których nie da się uzyskać przez samo gotowanie.`,
+    tip: `Wyciekniętego tłuszczu nie wylewaj — użyjesz go do podsmażenia cebuli w kroku 5.`
+  },
+  {
+    num: 2,
+    title: "Namaczanie grzybów",
+    timer: 7200,
+    text: `Namocz <span class="highlight">25 g suszonych grzybów leśnych</span> (borowiki lub podgrzybki) w <span class="highlight">300 ml zimnej wody</span> przez minimum 2 godziny. Najlepiej przez całą noc.`,
+    science: `Wody z moczenia nie wylewaj! To esencja grzybowa — terpeny, 1,8-cineol, geosminę. Wyrzucenie jej to jak wyrzucenie połowy smaku grzybów.`,
+    tip: `Jeśli moczysz krócej niż 2h, zalej wrzątkiem i namaczaj 30 minut.`
+  },
+  {
+    num: 3,
+    title: "Opalenie cebuli",
+    timer: 300,
+    text: `Jedną cebulę opal <span class="highlight">bezpośrednio nad palnikiem gazowym</span> lub na suchej patelni do zwęglenia skórki. Ma być naprawdę ciemna — nie tylko złota.`,
+    science: `Skarmelizowane cukry i lekko przypalona powierzchnia nadadzą wywarowi ciemniejszy kolor i głębię smaku. Identyczna technika stosowana we wszystkich klasycznych ciemnych bulionach.`,
+    tip: `Nie masz palnika gazowego? Połóż cebulę w całości na patelni grillowej i przytrzymaj aż skórka sczernieje.`
+  },
+  {
+    num: 4,
+    title: "Gotowanie wywaru bazowego",
+    timer: 5400,
+    text: `Do dużego garnka (min. 4 l) włóż upieczone żeberka i boczek, opaloną cebulę, marchewkę, pietruszkę, seler, por, liście laurowe, ziele angielskie, pieprz. Dodaj namoczone grzyby <span class="highlight">razem z całą wodą z moczenia</span>. Zalej 2 litrami zimnej wody. Doprowadź do wrzenia. <span class="highlight">Zbierz szumowiny dokładnie</span> — czysty wywar to czysta zupa. Zmniejsz ogień do minimum, przykryj i gotuj <span class="highlight">co najmniej 90 minut</span>.`,
+    science: `Im dłużej gotujesz na małym ogniu, tym więcej białek kolagenowych z kości przechodzi do wywaru. Żelatyna z kości daje wywarowi charakterystyczną, aksamitną konsystencję.`,
+    tip: `Wywar powinien delikatnie mrugać — nie bulgotać gwałtownie. Mocne gotowanie mąci wywar i niszczy subtelne aromaty.`
+  },
+  {
+    num: 5,
+    title: "Odcedzenie i podsmażenie",
+    timer: 600,
+    text: `Wyjmij kości i boczek. Boczek pokrój w kostkę. Kości obierz z mięsa i wróć do zupy. <span class="highlight">Odcedź wywar przez sito</span> — warzywa wyrzuć, grzyby zachowaj i pokrój w paski. Na patelni rozgrzej tłuszcz z pieczenia (lub łyżkę smalcu). Podsmaż kostki boczku do złotego koloru. Dodaj drugą cebulę pokrojoną w kostkę — smaż do szklistości. Całą zawartość patelni przenieś do odcedzonego wywaru.`,
+    science: `Podsmażony boczek to kolejna warstwa reakcji Maillarda — tym razem na gotowanym już mięsie. Skarmelizowana cebula wnosi słodycz i umami balansujące kwasowość zakwasu.`,
+    tip: `Nie spiesz się z cebulą — ma być szklista i lekko złota, nie surowa. 5–7 minut na średnim ogniu.`
+  },
+  {
+    num: 6,
+    title: "Gotowanie kiełbasy",
+    timer: 1200,
+    text: `Do wywaru z boczkiem i cebulą włóż <span class="highlight">białą kiełbasę surową</span> — nakłutą widelcem w kilku miejscach. Dodaj grzyby pokrojone w paski. Gotuj na małym ogniu <span class="highlight">15–20 minut</span> aż kiełbasa będzie miękka. Wyjmij kiełbasę, pokrój w plastry i wróć do zupy.`,
+    science: `Nakłuwanie kiełbasy zapobiega jej pęknięciu pod wpływem ciśnienia pary wewnątrz. Gotowanie na małym ogniu sprawia że kiełbasa stopniowo oddaje smak do wywaru zamiast "gotować się" w sobie.`,
+    tip: `Nie gotuj mocno — kiełbasa ma oddać smak, a nie rozpaść się. Lekkie mruganie wywaru wystarczy.`
+  },
+  {
+    num: 7,
+    title: "Zakwas — dodawaj partiami",
+    timer: 600,
+    text: `Wyjmij chłodną miskę (300 ml) wywaru. Mocno wstrząśnij zakwasem i wymieszaj go z tym wywarem — <span class="highlight">zahartowanie</span> zapobiega grudkom mąki. Przelej z powrotem do garnka energicznie mieszając. Zagotuj na średnio-małym ogniu i gotuj <span class="highlight">10 minut bez przykrycia</span>. <span class="highlight">Dodawaj zakwas partiami</span> — próbuj po każdej porcji. Nie cały naraz.`,
+    science: `Mąka żytnia w zakwasie to naturalny zagęstnik — skrobie żytnie żelatynizują podczas gotowania i nadają zupie charakterystyczną, gęstą konsystencję bez potrzeby dodawania mąki.`,
+    tip: `Zakwas domowy z typ 2000 jest znacznie mocniejszy niż sklepowy. Zacznij od 300 ml, próbuj, dodawaj resztę według uznania.`
+  },
+  {
+    num: 8,
+    title: "Czosnek i majeranek — na końcu",
+    timer: null,
+    text: `<span class="highlight">Zdejmij z ognia.</span> Dodaj 5 ząbków czosnku rozgniecionych przez praskę. Rozetrzyj majeranek między dłońmi i dodaj. Spróbuj. Dopraw solą i pieprzem. Opcjonalnie: szczypta cukru jeśli za kwaśne.`,
+    science: `Lotne związki allicyny w czosnku i olejki eteryczne w majeranku rozpadają się podczas gotowania. Dodane na gorącym, ale niegotującym się wywarze — zachowują pełny aromat. To różnica między żurkiem "czosnkowym" a żurkiem "z czosnekiem".`,
+    tip: `Czosnek przez praskę daje intensywniejszy smak niż siekany — komórki są rozerwane, allicyna uwolniona natychmiast.`
+  },
+  {
+    num: 9,
+    title: "Odpoczynek i podanie",
+    timer: 1800,
+    text: `Zostaw na <span class="highlight">minimum 30 minut</span> pod przykryciem — najlepiej na całą noc w lodówce. Przed podaniem podgrzej powoli na małym ogniu. <strong>Na talerz:</strong> plastry kiełbasy, połówka jajka, łyżka świeżo tartego chrzanu — dodanego do talerza, nie do garnka. Szczypta świeżo roztartego majeranku na wierzch.`,
+    science: `Chrzan podany świeżo przy stole zachowuje izotiocyjaniany — związki odpowiedzialne za ostrość. Gotowany w zupie traci je w ciągu kilku minut. Chrzan w garnku ≠ chrzan na talerzu.`,
+    tip: `Żurek jest zdecydowanie lepszy następnego dnia — smaki się przegryzają, kwasowość wyrównuje, aromat grzybów i wędzonki wchodzi głębiej.`
+  }
+];
+
+// ===== STATE =====
+let servings = 6;
+let unit = 'metric';
+let currentStep = 0;
+let timerInterval = null;
+let timerRemaining = 0;
+let timerRunning = false;
+
+// ===== SECTIONS =====
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const names = ['zakwas','skladniki','kroki','gotowanie','nauka'];
+  tabs[names.indexOf(name)].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== SERVINGS =====
+function changeServings(delta) {
+  servings = Math.max(1, Math.min(20, servings + delta));
+  document.getElementById('servings-display').textContent = servings;
+  document.getElementById('header-servings').textContent = servings + ' osób';
+  updateAmounts();
+}
+
+function updateAmounts() {
+  const factor = servings / 6;
+  document.querySelectorAll('[data-base]').forEach(el => {
+    const base = parseFloat(el.dataset.base);
+    const unitStr = el.dataset.unit;
+    let val = base * factor;
+
+    if (unit === 'imperial' && (unitStr === 'g' || unitStr === 'ml')) {
+      if (unitStr === 'g') {
+        const oz = val / 28.35;
+        el.textContent = oz < 16
+          ? oz.toFixed(oz < 1 ? 2 : 1) + ' oz'
+          : (oz / 16).toFixed(1) + ' lb';
+      } else {
+        const floz = val / 29.57;
+        el.textContent = floz < 16
+          ? floz.toFixed(1) + ' fl oz'
+          : (floz / 8).toFixed(1) + ' cup';
+      }
+    } else {
+      const display = val === Math.round(val) ? val.toFixed(0) : val % 0.5 === 0 ? val.toFixed(1) : val.toFixed(1);
+      el.textContent = display + ' ' + unitStr;
+    }
+  });
+}
+
+function setUnit(u, btn) {
+  unit = u;
+  document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateAmounts();
+}
+
+// ===== COOKING MODE =====
+function startCooking() {
+  currentStep = 0;
+  showSection('gotowanie');
+  renderStep();
+}
+
+function goToStep(idx) {
+  currentStep = idx;
+  showSection('gotowanie');
+  renderStep();
+}
+
+function renderStep() {
+  stopTimer();
+  const total = STEPS.length;
+  const step = STEPS[currentStep];
+
+  // Progress dots
+  let dots = '';
+  for (let i = 0; i < total; i++) {
+    let cls = i < currentStep ? 'done' : i === currentStep ? 'current' : '';
+    dots += `<div class="step-dot ${cls}"></div>`;
+  }
+  document.getElementById('step-progress').innerHTML = dots;
+
+  // Step card
+  let timerHTML = '';
+  if (step.timer) {
+    const m = Math.floor(step.timer / 60);
+    const s = step.timer % 60;
+    timerHTML = `
+      <div class="timer-block">
+        <div>
+          <div class="timer-label">Czas trwania</div>
+          <div class="timer-display" id="timer-display">${m}:${s.toString().padStart(2,'0')}</div>
+        </div>
+        <button class="timer-btn" id="timer-btn" onclick="toggleTimer(${step.timer})">▶ Start</button>
+      </div>`;
+  }
+
+  const scienceHTML = step.science ? `
+    <div class="science-box" style="margin-top:1rem;">
+      <strong>Dlaczego tak?</strong><br>${step.science}
+    </div>` : '';
+
+  const tipHTML = step.tip ? `
+    <div class="info-box" style="margin-top:0.75rem;">
+      <strong>💡 Wskazówka:</strong> ${step.tip}
+    </div>` : '';
+
+  const isLast = currentStep === total - 1;
+  const navHTML = `
+    <div class="step-nav">
+      ${currentStep > 0 ? `<button class="btn-nav btn-prev" onclick="prevStep()">← Wstecz</button>` : '<div></div>'}
+      <button class="btn-nav btn-next ${isLast ? 'finish' : ''}" onclick="${isLast ? 'finishCooking()' : 'nextStep()'}">
+        ${isLast ? '✓ Gotowe!' : 'Dalej →'}
+      </button>
+    </div>`;
+
+  document.getElementById('step-container').innerHTML = `
+    <div style="font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">
+      Krok ${currentStep + 1} z ${total}
+    </div>
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">${step.num}</div>
+        <div class="step-title">${step.title}</div>
+      </div>
+      <div class="step-body">
+        <p class="step-text">${step.text}</p>
+        ${timerHTML}
+        ${scienceHTML}
+        ${tipHTML}
+      </div>
+    </div>
+    ${navHTML}
+  `;
+
+  window.scrollTo(0, 0);
+}
+
+function nextStep() {
+  if (currentStep < STEPS.length - 1) {
+    currentStep++;
+    renderStep();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 0) {
+    currentStep--;
+    renderStep();
+  }
+}
+
+function finishCooking() {
+  stopTimer();
+  document.getElementById('step-progress').innerHTML = Array(STEPS.length).fill('<div class="step-dot done"></div>').join('');
+  document.getElementById('step-container').innerHTML = `
+    <div class="completion">
+      <div class="completion-icon">🍲</div>
+      <h2>Gotowe!</h2>
+      <p>Twój staropolski żur jest ukończony. Pamiętaj — najlepszy jest następnego dnia.</p>
+      <button class="start-cooking-btn" style="margin-top:1.5rem;" onclick="showSection('nauka')">
+        Przeczytaj — dlaczego ten przepis działa
+      </button>
+    </div>
+  `;
+}
+
+// ===== TIMER =====
+function toggleTimer(seconds) {
+  if (!timerRunning) {
+    if (timerRemaining === 0) timerRemaining = seconds;
+    timerRunning = true;
+    document.getElementById('timer-btn').textContent = '⏸ Pauza';
+    timerInterval = setInterval(() => {
+      timerRemaining--;
+      updateTimerDisplay();
+      if (timerRemaining <= 0) {
+        stopTimer();
+        document.getElementById('timer-display').textContent = '✓ Czas!';
+        document.getElementById('timer-btn').textContent = 'Gotowe';
+        try { new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAA==').play(); } catch(e){}
+      }
+    }, 1000);
+  } else {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    document.getElementById('timer-btn').textContent = '▶ Wznów';
+  }
+}
+
+function stopTimer() {
+  timerRunning = false;
+  timerRemaining = 0;
+  clearInterval(timerInterval);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerRemaining / 60);
+  const s = timerRemaining % 60;
+  const el = document.getElementById('timer-display');
+  if (el) el.textContent = m + ':' + s.toString().padStart(2,'0');
+}
+
+// ===== INIT =====
+updateAmounts();
+</script>
+</body>
+</html>
