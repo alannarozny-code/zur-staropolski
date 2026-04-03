@@ -21,6 +21,33 @@
     --line: #d9cfc4;
     --card: #faf7f2;
     --green: #2d5016;
+    --header-bg: #1a1410;
+    --nav-bg: #1a1410;
+    --science-bg: #f0f4f0;
+    --science-text: #2a3a20;
+    --warning-bg: #fef8f0;
+    --plan-tip-bg: #1a1410;
+    --plan-tip-color: #f5f0e8;
+  }
+
+  /* ===== CIEMNY MOTYW ===== */
+  html.dark {
+    --cream: #0f0d0b;
+    --dark: #f0ebe0;
+    --brown: #d4924a;
+    --amber: #e0a040;
+    --rust: #d4644a;
+    --muted: #8a8078;
+    --line: #2e2820;
+    --card: #1a1610;
+    --green: #5a9a30;
+    --header-bg: #080604;
+    --nav-bg: #080604;
+    --science-bg: #121a0c;
+    --science-text: #a0c880;
+    --warning-bg: #1a0f08;
+    --plan-tip-bg: #080604;
+    --plan-tip-color: #f0ebe0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,8 +63,8 @@
 
   /* HEADER */
   .header {
-    background: var(--dark);
-    color: var(--cream);
+    background: var(--header-bg);
+    color: var(--dark);
     padding: 2.5rem 1.5rem 2rem;
     position: relative;
     overflow: hidden;
@@ -83,7 +110,7 @@
   }
   .header-sub {
     font-size: 0.88rem;
-    color: rgba(245,240,232,0.6);
+    color: rgba(240,235,224,0.6);
     max-width: 340px;
     margin-top: 0.75rem;
   }
@@ -113,7 +140,7 @@
   /* NAV TABS */
   .nav-tabs {
     display: flex;
-    background: var(--dark);
+    background: var(--nav-bg);
     border-top: 1px solid rgba(255,255,255,0.08);
     overflow-x: auto;
     scrollbar-width: none;
@@ -302,7 +329,7 @@
   .info-box p + p { margin-top: 0.5rem; }
 
   .warning-box {
-    background: #fef8f0;
+    background: var(--warning-bg);
     border-left: 3px solid var(--rust);
     border-radius: 0 0.5rem 0.5rem 0;
     padding: 1rem 1.25rem;
@@ -314,14 +341,14 @@
   .warning-box strong { color: var(--rust); }
 
   .science-box {
-    background: #f0f4f0;
+    background: var(--science-bg);
     border-left: 3px solid var(--green);
     border-radius: 0 0.5rem 0.5rem 0;
     padding: 1rem 1.25rem;
     margin: 1rem 0;
     font-size: 0.85rem;
     line-height: 1.65;
-    color: #2a3a20;
+    color: var(--science-text);
   }
   .science-box strong { color: var(--green); font-weight: 500; }
 
@@ -352,7 +379,7 @@
     margin-bottom: 1rem;
   }
   .step-header {
-    background: var(--dark);
+    background: var(--header-bg);
     padding: 1rem 1.25rem;
     display: flex;
     align-items: center;
@@ -390,7 +417,7 @@
   /* TIMER */
   .timer-block {
     margin-top: 1rem;
-    background: var(--dark);
+    background: var(--header-bg);
     border-radius: 10px;
     padding: 0.85rem 1.1rem;
     display: flex;
@@ -446,7 +473,7 @@
     border: 1px solid var(--line);
   }
   .btn-next {
-    background: var(--dark);
+    background: var(--header-bg);
     color: var(--cream);
   }
   .btn-next:active { background: var(--brown); }
@@ -677,8 +704,8 @@
   .tl-badge.quick   { background: rgba(45,80,22,0.1);   color: var(--green); }
 
   .plan-tip {
-    background: var(--dark);
-    color: var(--cream);
+    background: var(--plan-tip-bg);
+    color: var(--plan-tip-color);
     border-radius: 0.75rem;
     padding: 1.1rem 1.25rem;
     font-size: 0.85rem;
@@ -719,6 +746,7 @@
     <button class="fs-btn active" id="fs-s" onclick="setFontSize('s')" title="Mały tekst">A</button>
     <button class="fs-btn" id="fs-m" onclick="setFontSize('m')" title="Średni tekst">A+</button>
     <button class="fs-btn" id="fs-l" onclick="setFontSize('l')" title="Duży tekst">A++</button>
+    <button class="fs-btn" id="theme-btn" onclick="toggleTheme()" title="Zmień motyw">☀</button>
   </div>
   <div class="header-label">Przepis Ultra · Tradycja Staropolska</div>
   <h1>Żur<br><em>Staropolski</em></h1>
@@ -947,8 +975,12 @@
     <div class="subsection-label">🔥 Baza wywaru — wędzonki</div>
     <ul class="ingredient-list">
       <li class="ingredient-item">
-        <span class="ing-name">Wędzone żeberka lub kości wieprzowe wędzone <span class="ing-note">pieczone przed gotowaniem — kluczowy krok</span></span>
-        <span class="ing-amount" data-base="600" data-unit="g"></span>
+        <span class="ing-name">Wędzone żeberka wieprzowe</span>
+        <span class="ing-amount" data-base="400" data-unit="g"></span>
+      </li>
+      <li class="ingredient-item">
+        <span class="ing-name">Wędzone kości wieprzowe <span class="ing-note">najlepiej z szyjki lub golonki</span></span>
+        <span class="ing-amount" data-base="300" data-unit="g"></span>
       </li>
       <li class="ingredient-item">
         <span class="ing-name">Boczek wędzony <span class="ing-note">cały kawałek, nie plastry</span></span>
@@ -1215,7 +1247,7 @@ function getSteps() { return [
     num: 1,
     title: "Pieczenie wędzonki — sekret głębokiego smaku",
     timer: 1800,
-    text: () => `Nagrzej piekarnik do <span class="highlight">220°C</span>. Ułóż ${n(600,'g')} wędzonych żeberek i ${n(300,'g')} boczku na blasze <span class="highlight">bez tłuszczu</span> — wędliny mają go wystarczająco. Piecz 25–30 minut aż będą głęboko zrumienione.`,
+    text: () => `Nagrzej piekarnik do <span class="highlight">220°C</span>. Ułóż ${n(400,'g')} wędzonych żeberek i ${n(300,'g')} wędzonych kości oraz ${n(300,'g')} boczku na blasze <span class="highlight">bez tłuszczu</span> — wędliny mają go wystarczająco. Piecz 25–30 minut aż będą głęboko zrumienione.`,
     science: `To najważniejszy krok całego przepisu. Reakcja Maillarda zachodzi wyłącznie na suchej powierzchni w wysokiej temperaturze — w piekarniku, nie w wodzie. Pieczone wędzonki oddadzą do wywaru związki aromatyczne (furanony, melanoidyny), których nie da się uzyskać przez samo gotowanie.`,
     tip: `Wyciekniętego tłuszczu nie wylewaj — użyjesz go do podsmażenia cebuli w kroku 5.`
   },
@@ -1239,7 +1271,7 @@ function getSteps() { return [
     num: 4,
     title: "Gotowanie wywaru bazowego",
     timer: 5400,
-    text: () => `Do dużego garnka włóż upieczone żeberka i boczek, opaloną cebulę, marchewkę, pietruszkę, seler, por, liście laurowe, ziele angielskie, pieprz. Dodaj namoczone grzyby <span class="highlight">razem z całą wodą z moczenia</span>. Zalej ${n(2000,'ml')} zimnej wody. Doprowadź do wrzenia. <span class="highlight">Zbierz szumowiny dokładnie</span> — czysty wywar to czysta zupa. Zmniejsz ogień do minimum, przykryj i gotuj <span class="highlight">co najmniej 90 minut</span>.`,
+    text: () => `Do dużego garnka włóż upieczone żeberka, kości i boczek, opaloną cebulę, marchewkę, pietruszkę, seler, por, liście laurowe, ziele angielskie, pieprz. Dodaj namoczone grzyby <span class="highlight">razem z całą wodą z moczenia</span>. Zalej ${n(2000,'ml')} zimnej wody. Doprowadź do wrzenia. <span class="highlight">Zbierz szumowiny dokładnie</span> — czysty wywar to czysta zupa. Zmniejsz ogień do minimum, przykryj i gotuj <span class="highlight">co najmniej 90 minut</span>.`,
     science: `Im dłużej gotujesz na małym ogniu, tym więcej białek kolagenowych z kości przechodzi do wywaru. Żelatyna z kości daje wywarowi charakterystyczną, aksamitną konsystencję.`,
     tip: `Wywar powinien delikatnie mrugać — nie bulgotać gwałtownie. Mocne gotowanie mąci wywar i niszczy subtelne aromaty.`
   },
@@ -1513,18 +1545,31 @@ function setFontSize(size) {
   if (size === 'l') html.classList.add('text-lg');
   document.querySelectorAll('.fs-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('fs-' + size).classList.add('active');
-  // Zachowaj wybór w sessionStorage
   sessionStorage.setItem('zurFontSize', size);
-  // Jeśli jesteśmy w trybie gotowania — przerysuj krok
   if (document.getElementById('section-gotowanie').classList.contains('active')) {
     renderStep();
   }
 }
 
+// ===== DARK MODE =====
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.classList.toggle('dark');
+  const btn = document.getElementById('theme-btn');
+  btn.textContent = isDark ? '☾' : '☀';
+  btn.title = isDark ? 'Jasny motyw' : 'Ciemny motyw';
+  sessionStorage.setItem('zurTheme', isDark ? 'dark' : 'light');
+}
+
 // ===== INIT =====
-// Przywróć rozmiar czcionki jeśli był zapisany
 const savedSize = sessionStorage.getItem('zurFontSize');
 if (savedSize) setFontSize(savedSize);
+const savedTheme = sessionStorage.getItem('zurTheme');
+if (savedTheme === 'dark') {
+  document.documentElement.classList.add('dark');
+  const btn = document.getElementById('theme-btn');
+  if (btn) { btn.textContent = '☾'; btn.title = 'Jasny motyw'; }
+}
 updateAmounts();
 </script>
 </body>
