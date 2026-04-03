@@ -1019,7 +1019,7 @@
         <span class="ing-amount" data-base="1" data-unit="szt."></span>
       </li>
       <li class="ingredient-item">
-        <span class="ing-name">Cebula <span class="ing-note">jedna do opalenia, jedna do zupy</span></span>
+        <span class="ing-name">Cebula <span class="ing-note">połowa do opalenia, połowa do podsmażenia w kroku 5</span></span>
         <span class="ing-amount" data-base="2" data-unit="szt."></span>
       </li>
     </ul>
@@ -1274,7 +1274,7 @@ function getSteps() { return [
     num: 3,
     title: "Opalenie cebuli",
     timer: 300,
-    text: () => `Jedną z ${n(2,'szt.')} cebul opal <span class="highlight">bezpośrednio nad palnikiem gazowym</span> lub na suchej patelni do zwęglenia skórki. Ma być naprawdę ciemna — nie tylko złota.`,
+    text: () => `Opal ${n(1,'szt.')} cebuli bezpośrednio nad <span class="highlight">palnikiem gazowym</span> lub na suchej patelni do zwęglenia skórki. Ma być naprawdę ciemna — nie tylko złota. Pozostałe ${n(1,'szt.')} cebuli zostaw do podsmażenia w kroku 5.`,
     science: `Skarmelizowane cukry i lekko przypalona powierzchnia nadadzą wywarowi ciemniejszy kolor i głębię smaku. Identyczna technika stosowana we wszystkich klasycznych ciemnych bulionach.`,
     tip: `Nie masz palnika gazowego? Połóż cebulę w całości na patelni grillowej i przytrzymaj aż skórka sczernieje.`
   },
@@ -1290,7 +1290,7 @@ function getSteps() { return [
     num: 5,
     title: "Odcedzenie i podsmażenie",
     timer: 600,
-    text: () => `Wyjmij kości i boczek. Boczek pokrój w kostkę. Kości obierz z mięsa i wróć do zupy. <span class="highlight">Odcedź wywar przez sito</span> — warzywa wyrzuć, grzyby zachowaj i pokrój w paski. Na patelni rozgrzej tłuszcz z pieczenia (lub łyżkę smalcu). Podsmaż kostki boczku do złotego koloru. Dodaj drugą cebulę pokrojoną w kostkę — smaż do szklistości. Całą zawartość patelni przenieś do odcedzonego wywaru.`,
+    text: () => `Wyjmij kości i boczek. Boczek pokrój w kostkę. Kości obierz z mięsa i wróć do zupy. <span class="highlight">Odcedź wywar przez sito</span> — warzywa wyrzuć, grzyby zachowaj i pokrój w paski. Na patelni rozgrzej tłuszcz z pieczenia (lub ${n(1,'łyżkę')} smalcu). Podsmaż kostki boczku do złotego koloru. Dodaj ${n(1,'szt.')} cebuli pokrojonej w kostkę — smaż do szklistości. Całą zawartość patelni przenieś do odcedzonego wywaru.`,
     science: `Podsmażony boczek to kolejna warstwa reakcji Maillarda — tym razem na gotowanym już mięsie. Skarmelizowana cebula wnosi słodycz i umami balansujące kwasowość zakwasu.`,
     tip: `Nie spiesz się z cebulą — ma być szklista i lekko złota, nie surowa. 5–7 minut na średnim ogniu.`
   },
@@ -1306,7 +1306,7 @@ function getSteps() { return [
     num: 7,
     title: "Zakwas — dodawaj partiami",
     timer: 600,
-    text: () => `Wyjmij ~300 ml wywaru do osobnej miski. Mocno wstrząśnij ${n(500,'ml')} zakwasu i wymieszaj go z tym wywarem — <span class="highlight">zahartowanie</span> zapobiega grudkom mąki. Przelej z powrotem do garnka energicznie mieszając. Zagotuj na średnio-małym ogniu i gotuj <span class="highlight">10 minut bez przykrycia</span>. <span class="highlight">Dodawaj zakwas partiami</span> — próbuj po każdej porcji. Nie cały naraz.`,
+    text: () => `Wyjmij ${n(300,'ml')} wywaru do osobnej miski. Mocno wstrząśnij ${n(500,'ml')} zakwasu i wymieszaj go z tym wywarem — <span class="highlight">zahartowanie</span> zapobiega grudkom mąki. Przelej z powrotem do garnka energicznie mieszając. Zagotuj na średnio-małym ogniu i gotuj <span class="highlight">10 minut bez przykrycia</span>. <span class="highlight">Dodawaj zakwas partiami</span> — próbuj po każdej porcji. Nie cały naraz.`,
     science: `Mąka żytnia w zakwasie to naturalny zagęstnik — skrobie żytnie żelatynizują podczas gotowania i nadają zupie charakterystyczną, gęstą konsystencję bez potrzeby dodawania mąki.`,
     tip: `Zakwas domowy z typ 2000 jest znacznie mocniejszy niż sklepowy. Zacznij od połowy ilości, próbuj, dodawaj resztę według uznania.`
   },
