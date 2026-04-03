@@ -597,24 +597,25 @@
     top: 1rem;
     right: 1.25rem;
     display: flex;
-    gap: 0.4rem;
+    flex-direction: column;
+    gap: 0.35rem;
     z-index: 10;
   }
   .fs-btn {
     background: rgba(245,240,232,0.12);
     border: 1px solid rgba(245,240,232,0.25);
-    color: rgba(245,240,232,0.75);
+    color: rgba(245,240,232,0.85);
     border-radius: 0.5rem;
     cursor: pointer;
     font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1;
-    padding: 8px 11px;
-    font-size: 13px;
+    padding: 10px 14px;
+    font-size: 15px;
     transition: all 0.15s;
     letter-spacing: 0.01em;
-    min-width: 36px;
-    min-height: 36px;
+    min-width: 48px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1764,7 +1765,10 @@ function toggleTheme() {
 const savedSize = sessionStorage.getItem('zurFontSize');
 if (savedSize) setFontSize(savedSize);
 const savedTheme = sessionStorage.getItem('zurTheme');
-if (savedTheme === 'dark') {
+// Domyślnie ciemny motyw — jasny tylko jeśli użytkownik go wybrał
+if (savedTheme === 'light') {
+  // zostaw jasny
+} else {
   document.documentElement.classList.add('dark');
   const btn = document.getElementById('theme-btn');
   if (btn) { btn.textContent = '☾'; btn.title = 'Jasny motyw'; }
