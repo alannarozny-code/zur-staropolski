@@ -808,9 +808,87 @@
     padding: 0.3rem 0;
     font-family: 'DM Sans', sans-serif;
   }
+
+  /* ===== ENTRY OVERLAY ===== */
+  .entry-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(10, 8, 5, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: opacity 0.5s;
+  }
+  .entry-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .entry-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #f0ebe0;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .entry-title em { color: var(--amber); font-style: italic; }
+  .entry-sub {
+    font-size: 0.88rem;
+    color: rgba(240,235,224,0.55);
+    text-align: center;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+  .entry-btn {
+    background: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 3rem;
+    padding: 0.9rem 2.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 4px 20px rgba(29,185,84,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .entry-btn:active { transform: scale(0.96); }
+  .entry-btn svg { width: 1.1rem; height: 1.1rem; fill: white; flex-shrink: 0; }
+  .entry-skip {
+    font-size: 0.78rem;
+    color: rgba(240,235,224,0.35);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem;
+  }
+  .entry-skip:hover { color: rgba(240,235,224,0.6); }
 </style>
 </head>
 <body>
+
+<!-- ===== ENTRY OVERLAY ===== -->
+<div class="entry-overlay" id="entry-overlay">
+  <div class="entry-title">Żur<br><em>Staropolski</em></div>
+  <div class="entry-sub">Przepis ultra — wywar na pieczonych wędzonych kościach, leśne grzyby, tradycja śląsko-staropolska.</div>
+  <button class="entry-btn" onclick="enterWithMusic()">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.348-1.435-5.304-1.76-8.785-.964-.335.077-.67-.133-.746-.469-.077-.336.132-.67.469-.746 3.809-.871 7.077-.496 9.713 1.115.294.18.386.563.206.857zm1.223-2.722c-.226.367-.706.482-1.072.257-2.687-1.652-6.785-2.131-9.965-1.166-.413.127-.848-.106-.973-.517-.125-.413.108-.848.518-.973 3.632-1.102 8.147-.568 11.234 1.328.366.226.48.707.258 1.071zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71c-.493.15-1.016-.129-1.166-.623-.148-.495.13-1.016.624-1.165 3.532-1.073 9.404-.866 13.115 1.337.445.264.590.838.327 1.282-.264.443-.838.590-1.283.326z"/></svg>
+    Wejdź i włącz muzykę
+  </button>
+  <button class="entry-skip" onclick="enterWithoutMusic()">Pomiń muzykę</button>
+</div>
 
 <div class="header">
   <div class="header-inner">
@@ -1720,6 +1798,33 @@ function toggleMusic() {
   const panel = document.getElementById('music-panel');
   const isOpen = panel.classList.toggle('open');
   document.getElementById('music-toggle').title = isOpen ? 'Zamknij odtwarzacz' : 'Muzyka w tle';
+}
+
+function enterWithMusic() {
+  dismissOverlay();
+  // Otwórz panel i uruchom autoplay przez postMessage do Spotify iframe
+  const panel = document.getElementById('music-panel');
+  panel.classList.add('open');
+  document.getElementById('music-toggle').title = 'Zamknij odtwarzacz';
+  // Poczekaj aż iframe się załaduje, potem wyślij komendę play
+  const iframe = document.getElementById('spotify-iframe');
+  const tryPlay = () => {
+    try {
+      iframe.contentWindow.postMessage({ command: 'play' }, 'https://open.spotify.com');
+    } catch(e) {}
+  };
+  iframe.addEventListener('load', () => setTimeout(tryPlay, 800), { once: true });
+  setTimeout(tryPlay, 2000); // fallback
+}
+
+function enterWithoutMusic() {
+  dismissOverlay();
+}
+
+function dismissOverlay() {
+  const overlay = document.getElementById('entry-overlay');
+  overlay.classList.add('hidden');
+  setTimeout(() => overlay.style.display = 'none', 500);
 }
 </script>
 
