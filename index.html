@@ -627,7 +627,18 @@
   }
   .fs-btn:active { opacity: 0.75; }
 
-  /* ===== TIMELINE / PLAN ===== */
+  /* SWIPE HINT */
+  .swipe-hint {
+    display: none;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    padding-bottom: 0.25rem;
+  }
+  @media (pointer: coarse) {
+    .swipe-hint { display: block; }
+  }
   .plan-intro {
     font-size: 0.9rem;
     color: var(--muted);
@@ -1330,6 +1341,7 @@
     </div>
   </div>
   <div class="step-progress" id="step-progress"></div>
+  <div class="swipe-hint">← przesuń aby zmienić krok →</div>
   <div id="step-container"></div>
 </section>
 
@@ -1657,6 +1669,41 @@ function prevStep() {
     renderStep();
   }
 }
+
+// ===== SWIPE NAVIGATION =====
+(function() {
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  document.addEventListener('touchstart', function(e) {
+    // Tylko w sekcji gotowanie
+    if (!document.getElementById('section-gotowanie').classList.contains('active')) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    if (!document.getElementById('section-gotowanie').classList.contains('active')) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    // Swipe: poziomy ruch > 60px, czas < 400ms, pionowy < połowy poziomego
+    if (Math.abs(dx) < 60 || dt > 400 || Math.abs(dy) > Math.abs(dx) * 0.7) return;
+
+    if (dx < 0) {
+      // Swipe lewo → następny krok
+      const STEPS = getSteps();
+      if (currentStep < STEPS.length - 1) nextStep();
+      else if (currentStep === STEPS.length - 1) finishCooking();
+    } else {
+      // Swipe prawo → poprzedni krok
+      if (currentStep > 0) prevStep();
+    }
+  }, { passive: true });
+})();
 
 function finishCooking() {
   stopTimer();
