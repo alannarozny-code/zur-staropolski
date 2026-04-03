@@ -6,6 +6,11 @@
 <title>Żur Staropolski — Przepis Ultra</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  /* ===== ROZMIAR TEKSTU ===== */
+  html { font-size: 16px; }
+  html.text-md { font-size: 19px; }
+  html.text-lg { font-size: 22px; }
+
   :root {
     --cream: #f5f0e8;
     --dark: #1a1410;
@@ -36,6 +41,11 @@
     padding: 2.5rem 1.5rem 2rem;
     position: relative;
     overflow: hidden;
+  }
+  .header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
   }
   .header::before {
     content: '';
@@ -72,7 +82,7 @@
     font-style: italic;
   }
   .header-sub {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: rgba(245,240,232,0.6);
     max-width: 340px;
     margin-top: 0.75rem;
@@ -88,7 +98,7 @@
     flex-direction: column;
   }
   .meta-label {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--amber);
@@ -109,9 +119,15 @@
     scrollbar-width: none;
   }
   .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tabs-inner {
+    display: flex;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
   .nav-tab {
     flex: 1;
-    min-width: 90px;
+    min-width: 5.5rem;
     padding: 0.85rem 0.5rem;
     font-size: 0.75rem;
     letter-spacing: 0.08em;
@@ -159,7 +175,7 @@
     gap: 0.75rem;
   }
   .btn-serving {
-    width: 32px; height: 32px;
+    width: 2rem; height: 2rem;
     border-radius: 50%;
     border: 1px solid var(--brown);
     background: none;
@@ -272,10 +288,10 @@
   .info-box {
     background: var(--card);
     border-left: 3px solid var(--amber);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 0.5rem 0.5rem 0;
     padding: 1rem 1.25rem;
     margin: 1rem 0;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     line-height: 1.65;
     color: var(--dark);
   }
@@ -288,10 +304,10 @@
   .warning-box {
     background: #fef8f0;
     border-left: 3px solid var(--rust);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 0.5rem 0.5rem 0;
     padding: 1rem 1.25rem;
     margin: 1rem 0;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     line-height: 1.65;
     color: var(--dark);
   }
@@ -300,10 +316,10 @@
   .science-box {
     background: #f0f4f0;
     border-left: 3px solid var(--green);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 0.5rem 0.5rem 0;
     padding: 1rem 1.25rem;
     margin: 1rem 0;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     line-height: 1.65;
     color: #2a3a20;
   }
@@ -359,8 +375,8 @@
     padding: 1.25rem;
   }
   .step-text {
-    font-size: 0.92rem;
-    line-height: 1.75;
+    font-size: 0.95rem;
+    line-height: 1.8;
     color: var(--dark);
   }
   .step-text .highlight {
@@ -398,8 +414,8 @@
     background: var(--amber);
     color: var(--dark);
     border: none;
-    border-radius: 6px;
-    font-size: 0.8rem;
+    border-radius: 0.4rem;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     font-family: 'DM Sans', sans-serif;
@@ -415,8 +431,8 @@
   .btn-nav {
     flex: 1;
     padding: 0.9rem;
-    border-radius: 10px;
-    font-size: 0.85rem;
+    border-radius: 0.65rem;
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     cursor: pointer;
@@ -459,18 +475,18 @@
   .note-card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 0.75rem;
     padding: 1.25rem;
     margin-bottom: 1rem;
   }
   .note-card h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+    font-size: 1.05rem;
     margin-bottom: 0.5rem;
     color: var(--brown);
   }
   .note-card p {
-    font-size: 0.86rem;
+    font-size: 0.9rem;
     color: var(--dark);
     line-height: 1.7;
   }
@@ -517,13 +533,13 @@
     font-weight: 700;
   }
   .step-overview-title {
-    font-size: 0.87rem;
+    font-size: 0.9rem;
     color: var(--dark);
     font-weight: 500;
     line-height: 1.4;
   }
   .step-overview-time {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--muted);
     margin-top: 0.15rem;
   }
@@ -546,7 +562,38 @@
     text-transform: uppercase;
   }
 
+  /* FONT SIZE TOGGLE */
+  .font-size-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    display: flex;
+    gap: 0.3rem;
+    z-index: 10;
+  }
+  .fs-btn {
+    background: rgba(245,240,232,0.1);
+    border: 1px solid rgba(245,240,232,0.2);
+    color: rgba(245,240,232,0.6);
+    border-radius: 0.35rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.72rem;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .fs-btn.active {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--dark);
+  }
+  .fs-btn:active { opacity: 0.75; }
+
   @media (min-width: 600px) {
+    .header { padding: 2.5rem 2rem 2rem; }
     .header h1 { font-size: 2.8rem; }
     .section { padding: 2rem; max-width: 640px; margin: 0 auto; }
   }
@@ -555,6 +602,12 @@
 <body>
 
 <div class="header">
+  <div class="header-inner">
+  <div class="font-size-toggle">
+    <button class="fs-btn active" id="fs-s" onclick="setFontSize('s')" title="Mały tekst">A</button>
+    <button class="fs-btn" id="fs-m" onclick="setFontSize('m')" title="Średni tekst">A+</button>
+    <button class="fs-btn" id="fs-l" onclick="setFontSize('l')" title="Duży tekst">A++</button>
+  </div>
   <div class="header-label">Przepis Ultra · Tradycja Staropolska</div>
   <h1>Żur<br><em>Staropolski</em></h1>
   <p class="header-sub">Wersja maksymalnie esencjonalna — wywar na pieczonych wędzonych kościach, leśne grzyby, bez śmietany. Wzorowana na tradycji śląsko-staropolskiej.</p>
@@ -572,14 +625,17 @@
       <span class="meta-value" id="header-servings">6 osób</span>
     </div>
   </div>
+  </div>
 </div>
 
 <nav class="nav-tabs">
-  <button class="nav-tab active" onclick="showSection('zakwas')">Zakwas</button>
-  <button class="nav-tab" onclick="showSection('skladniki')">Składniki</button>
-  <button class="nav-tab" onclick="showSection('kroki')">Kroki</button>
-  <button class="nav-tab" onclick="showSection('gotowanie')">Get Cooking</button>
-  <button class="nav-tab" onclick="showSection('nauka')">Dlaczego?</button>
+  <div class="nav-tabs-inner">
+    <button class="nav-tab active" onclick="showSection('zakwas')">Zakwas</button>
+    <button class="nav-tab" onclick="showSection('skladniki')">Składniki</button>
+    <button class="nav-tab" onclick="showSection('kroki')">Kroki</button>
+    <button class="nav-tab" onclick="showSection('gotowanie')">Get Cooking</button>
+    <button class="nav-tab" onclick="showSection('nauka')">Dlaczego?</button>
+  </div>
 </nav>
 
 <!-- ===== ZAKWAS ===== -->
@@ -851,6 +907,23 @@
 
 <!-- ===== GET COOKING ===== -->
 <section class="section" id="section-gotowanie">
+  <div class="servings-bar" style="margin-bottom:1rem;">
+    <div>
+      <div class="servings-label">Porcje</div>
+      <div class="servings-control">
+        <button class="btn-serving" onclick="changeServings(-1)">−</button>
+        <div class="servings-num" id="servings-display-cook">6</div>
+        <button class="btn-serving" onclick="changeServings(1)">+</button>
+      </div>
+    </div>
+    <div>
+      <div class="servings-label">Jednostki</div>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="unit-btn-cook-metric" onclick="setUnit('metric', this, true)">SI</button>
+        <button class="unit-btn" id="unit-btn-cook-imperial" onclick="setUnit('imperial', this, true)">UK/US</button>
+      </div>
+    </div>
+  </div>
   <div class="step-progress" id="step-progress"></div>
   <div id="step-container"></div>
 </section>
@@ -907,13 +980,30 @@
 </section>
 
 <script>
+// ===== HELPERS =====
+function amt(base, unitStr) {
+  const factor = servings / 6;
+  let val = base * factor;
+  if (unit === 'imperial' && unitStr === 'g') {
+    const oz = val / 28.35;
+    return oz < 16 ? oz.toFixed(1) + ' oz' : (oz / 16).toFixed(1) + ' lb';
+  }
+  if (unit === 'imperial' && unitStr === 'ml') {
+    const floz = val / 29.57;
+    return floz < 16 ? floz.toFixed(1) + ' fl oz' : (floz / 8).toFixed(1) + ' cup';
+  }
+  const disp = Number.isInteger(val) ? val : val.toFixed(1).replace(/\.0$/, '');
+  return `<span class="highlight">${disp} ${unitStr}</span>`;
+}
+function n(base, unitStr) { return amt(base, unitStr); }
+
 // ===== DATA =====
-const STEPS = [
+function getSteps() { return [
   {
     num: 1,
     title: "Pieczenie wędzonki — sekret głębokiego smaku",
     timer: 1800,
-    text: `Nagrzej piekarnik do <span class="highlight">220°C</span>. Ułóż wędzone żeberka i boczek na blasze <span class="highlight">bez tłuszczu</span> — wędliny mają go wystarczająco. Piecz 25–30 minut aż będą głęboko zrumienione.`,
+    text: () => `Nagrzej piekarnik do <span class="highlight">220°C</span>. Ułóż ${n(600,'g')} wędzonych żeberek i ${n(300,'g')} boczku na blasze <span class="highlight">bez tłuszczu</span> — wędliny mają go wystarczająco. Piecz 25–30 minut aż będą głęboko zrumienione.`,
     science: `To najważniejszy krok całego przepisu. Reakcja Maillarda zachodzi wyłącznie na suchej powierzchni w wysokiej temperaturze — w piekarniku, nie w wodzie. Pieczone wędzonki oddadzą do wywaru związki aromatyczne (furanony, melanoidyny), których nie da się uzyskać przez samo gotowanie.`,
     tip: `Wyciekniętego tłuszczu nie wylewaj — użyjesz go do podsmażenia cebuli w kroku 5.`
   },
@@ -921,7 +1011,7 @@ const STEPS = [
     num: 2,
     title: "Namaczanie grzybów",
     timer: 7200,
-    text: `Namocz <span class="highlight">25 g suszonych grzybów leśnych</span> (borowiki lub podgrzybki) w <span class="highlight">300 ml zimnej wody</span> przez minimum 2 godziny. Najlepiej przez całą noc.`,
+    text: () => `Namocz ${n(25,'g')} suszonych grzybów leśnych (borowiki lub podgrzybki) w ${n(300,'ml')} zimnej wody przez minimum 2 godziny. Najlepiej przez całą noc.`,
     science: `Wody z moczenia nie wylewaj! To esencja grzybowa — terpeny, 1,8-cineol, geosminę. Wyrzucenie jej to jak wyrzucenie połowy smaku grzybów.`,
     tip: `Jeśli moczysz krócej niż 2h, zalej wrzątkiem i namaczaj 30 minut.`
   },
@@ -929,7 +1019,7 @@ const STEPS = [
     num: 3,
     title: "Opalenie cebuli",
     timer: 300,
-    text: `Jedną cebulę opal <span class="highlight">bezpośrednio nad palnikiem gazowym</span> lub na suchej patelni do zwęglenia skórki. Ma być naprawdę ciemna — nie tylko złota.`,
+    text: () => `Jedną z ${n(2,'szt.')} cebul opal <span class="highlight">bezpośrednio nad palnikiem gazowym</span> lub na suchej patelni do zwęglenia skórki. Ma być naprawdę ciemna — nie tylko złota.`,
     science: `Skarmelizowane cukry i lekko przypalona powierzchnia nadadzą wywarowi ciemniejszy kolor i głębię smaku. Identyczna technika stosowana we wszystkich klasycznych ciemnych bulionach.`,
     tip: `Nie masz palnika gazowego? Połóż cebulę w całości na patelni grillowej i przytrzymaj aż skórka sczernieje.`
   },
@@ -937,7 +1027,7 @@ const STEPS = [
     num: 4,
     title: "Gotowanie wywaru bazowego",
     timer: 5400,
-    text: `Do dużego garnka (min. 4 l) włóż upieczone żeberka i boczek, opaloną cebulę, marchewkę, pietruszkę, seler, por, liście laurowe, ziele angielskie, pieprz. Dodaj namoczone grzyby <span class="highlight">razem z całą wodą z moczenia</span>. Zalej 2 litrami zimnej wody. Doprowadź do wrzenia. <span class="highlight">Zbierz szumowiny dokładnie</span> — czysty wywar to czysta zupa. Zmniejsz ogień do minimum, przykryj i gotuj <span class="highlight">co najmniej 90 minut</span>.`,
+    text: () => `Do dużego garnka włóż upieczone żeberka i boczek, opaloną cebulę, marchewkę, pietruszkę, seler, por, liście laurowe, ziele angielskie, pieprz. Dodaj namoczone grzyby <span class="highlight">razem z całą wodą z moczenia</span>. Zalej ${n(2000,'ml')} zimnej wody. Doprowadź do wrzenia. <span class="highlight">Zbierz szumowiny dokładnie</span> — czysty wywar to czysta zupa. Zmniejsz ogień do minimum, przykryj i gotuj <span class="highlight">co najmniej 90 minut</span>.`,
     science: `Im dłużej gotujesz na małym ogniu, tym więcej białek kolagenowych z kości przechodzi do wywaru. Żelatyna z kości daje wywarowi charakterystyczną, aksamitną konsystencję.`,
     tip: `Wywar powinien delikatnie mrugać — nie bulgotać gwałtownie. Mocne gotowanie mąci wywar i niszczy subtelne aromaty.`
   },
@@ -945,7 +1035,7 @@ const STEPS = [
     num: 5,
     title: "Odcedzenie i podsmażenie",
     timer: 600,
-    text: `Wyjmij kości i boczek. Boczek pokrój w kostkę. Kości obierz z mięsa i wróć do zupy. <span class="highlight">Odcedź wywar przez sito</span> — warzywa wyrzuć, grzyby zachowaj i pokrój w paski. Na patelni rozgrzej tłuszcz z pieczenia (lub łyżkę smalcu). Podsmaż kostki boczku do złotego koloru. Dodaj drugą cebulę pokrojoną w kostkę — smaż do szklistości. Całą zawartość patelni przenieś do odcedzonego wywaru.`,
+    text: () => `Wyjmij kości i boczek. Boczek pokrój w kostkę. Kości obierz z mięsa i wróć do zupy. <span class="highlight">Odcedź wywar przez sito</span> — warzywa wyrzuć, grzyby zachowaj i pokrój w paski. Na patelni rozgrzej tłuszcz z pieczenia (lub łyżkę smalcu). Podsmaż kostki boczku do złotego koloru. Dodaj drugą cebulę pokrojoną w kostkę — smaż do szklistości. Całą zawartość patelni przenieś do odcedzonego wywaru.`,
     science: `Podsmażony boczek to kolejna warstwa reakcji Maillarda — tym razem na gotowanym już mięsie. Skarmelizowana cebula wnosi słodycz i umami balansujące kwasowość zakwasu.`,
     tip: `Nie spiesz się z cebulą — ma być szklista i lekko złota, nie surowa. 5–7 minut na średnim ogniu.`
   },
@@ -953,7 +1043,7 @@ const STEPS = [
     num: 6,
     title: "Gotowanie kiełbasy",
     timer: 1200,
-    text: `Do wywaru z boczkiem i cebulą włóż <span class="highlight">białą kiełbasę surową</span> — nakłutą widelcem w kilku miejscach. Dodaj grzyby pokrojone w paski. Gotuj na małym ogniu <span class="highlight">15–20 minut</span> aż kiełbasa będzie miękka. Wyjmij kiełbasę, pokrój w plastry i wróć do zupy.`,
+    text: () => `Do wywaru włóż ${n(400,'g')} białej kiełbasy surowej — nakłutej widelcem w kilku miejscach. Dodaj grzyby pokrojone w paski. Gotuj na małym ogniu <span class="highlight">15–20 minut</span> aż kiełbasa będzie miękka. Wyjmij kiełbasę, pokrój w plastry i wróć do zupy.`,
     science: `Nakłuwanie kiełbasy zapobiega jej pęknięciu pod wpływem ciśnienia pary wewnątrz. Gotowanie na małym ogniu sprawia że kiełbasa stopniowo oddaje smak do wywaru zamiast "gotować się" w sobie.`,
     tip: `Nie gotuj mocno — kiełbasa ma oddać smak, a nie rozpaść się. Lekkie mruganie wywaru wystarczy.`
   },
@@ -961,15 +1051,15 @@ const STEPS = [
     num: 7,
     title: "Zakwas — dodawaj partiami",
     timer: 600,
-    text: `Wyjmij chłodną miskę (300 ml) wywaru. Mocno wstrząśnij zakwasem i wymieszaj go z tym wywarem — <span class="highlight">zahartowanie</span> zapobiega grudkom mąki. Przelej z powrotem do garnka energicznie mieszając. Zagotuj na średnio-małym ogniu i gotuj <span class="highlight">10 minut bez przykrycia</span>. <span class="highlight">Dodawaj zakwas partiami</span> — próbuj po każdej porcji. Nie cały naraz.`,
+    text: () => `Wyjmij ~300 ml wywaru do osobnej miski. Mocno wstrząśnij ${n(500,'ml')} zakwasu i wymieszaj go z tym wywarem — <span class="highlight">zahartowanie</span> zapobiega grudkom mąki. Przelej z powrotem do garnka energicznie mieszając. Zagotuj na średnio-małym ogniu i gotuj <span class="highlight">10 minut bez przykrycia</span>. <span class="highlight">Dodawaj zakwas partiami</span> — próbuj po każdej porcji. Nie cały naraz.`,
     science: `Mąka żytnia w zakwasie to naturalny zagęstnik — skrobie żytnie żelatynizują podczas gotowania i nadają zupie charakterystyczną, gęstą konsystencję bez potrzeby dodawania mąki.`,
-    tip: `Zakwas domowy z typ 2000 jest znacznie mocniejszy niż sklepowy. Zacznij od 300 ml, próbuj, dodawaj resztę według uznania.`
+    tip: `Zakwas domowy z typ 2000 jest znacznie mocniejszy niż sklepowy. Zacznij od połowy ilości, próbuj, dodawaj resztę według uznania.`
   },
   {
     num: 8,
     title: "Czosnek i majeranek — na końcu",
     timer: null,
-    text: `<span class="highlight">Zdejmij z ognia.</span> Dodaj 5 ząbków czosnku rozgniecionych przez praskę. Rozetrzyj majeranek między dłońmi i dodaj. Spróbuj. Dopraw solą i pieprzem. Opcjonalnie: szczypta cukru jeśli za kwaśne.`,
+    text: () => `<span class="highlight">Zdejmij z ognia.</span> Dodaj ${n(5,'ząbków')} czosnku rozgniecionych przez praskę. Rozetrzyj ${n(2,'łyżeczki')} majeranku między dłońmi i dodaj. Spróbuj. Dopraw solą i pieprzem. Opcjonalnie: szczypta cukru jeśli za kwaśne.`,
     science: `Lotne związki allicyny w czosnku i olejki eteryczne w majeranku rozpadają się podczas gotowania. Dodane na gorącym, ale niegotującym się wywarze — zachowują pełny aromat. To różnica między żurkiem "czosnkowym" a żurkiem "z czosnekiem".`,
     tip: `Czosnek przez praskę daje intensywniejszy smak niż siekany — komórki są rozerwane, allicyna uwolniona natychmiast.`
   },
@@ -977,11 +1067,11 @@ const STEPS = [
     num: 9,
     title: "Odpoczynek i podanie",
     timer: 1800,
-    text: `Zostaw na <span class="highlight">minimum 30 minut</span> pod przykryciem — najlepiej na całą noc w lodówce. Przed podaniem podgrzej powoli na małym ogniu. <strong>Na talerz:</strong> plastry kiełbasy, połówka jajka, łyżka świeżo tartego chrzanu — dodanego do talerza, nie do garnka. Szczypta świeżo roztartego majeranku na wierzch.`,
+    text: () => `Zostaw na <span class="highlight">minimum 30 minut</span> pod przykryciem — najlepiej na całą noc w lodówce. Przed podaniem podgrzej powoli na małym ogniu. <strong>Na talerz (${servings} porcji):</strong> plastry kiełbasy, połówka jajka (${n(6,'szt.')} razem), ${n(2,'łyżki')} świeżo tartego chrzanu — dodanego do talerza, nie do garnka. Szczypta świeżo roztartego majeranku na wierzch.`,
     science: `Chrzan podany świeżo przy stole zachowuje izotiocyjaniany — związki odpowiedzialne za ostrość. Gotowany w zupie traci je w ciągu kilku minut. Chrzan w garnku ≠ chrzan na talerzu.`,
     tip: `Żurek jest zdecydowanie lepszy następnego dnia — smaki się przegryzają, kwasowość wyrównuje, aromat grzybów i wędzonki wchodzi głębiej.`
   }
-];
+];}
 
 // ===== STATE =====
 let servings = 6;
@@ -1006,6 +1096,8 @@ function showSection(name) {
 function changeServings(delta) {
   servings = Math.max(1, Math.min(20, servings + delta));
   document.getElementById('servings-display').textContent = servings;
+  const cookDisp = document.getElementById('servings-display-cook');
+  if (cookDisp) cookDisp.textContent = servings;
   document.getElementById('header-servings').textContent = servings + ' osób';
   updateAmounts();
 }
@@ -1030,16 +1122,26 @@ function updateAmounts() {
           : (floz / 8).toFixed(1) + ' cup';
       }
     } else {
-      const display = val === Math.round(val) ? val.toFixed(0) : val % 0.5 === 0 ? val.toFixed(1) : val.toFixed(1);
+      const display = val === Math.round(val) ? val.toFixed(0) : val.toFixed(1);
       el.textContent = display + ' ' + unitStr;
     }
   });
+  // Odśwież krok jeśli jesteśmy w trybie gotowania
+  if (document.getElementById('section-gotowanie').classList.contains('active')) {
+    renderStep();
+  }
 }
 
 function setUnit(u, btn) {
   unit = u;
   document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  // Aktywuj wszystkie przyciski tej samej jednostki (składniki + gotowanie)
+  document.querySelectorAll('.unit-btn').forEach(b => {
+    if ((u === 'metric' && b.textContent.trim() === 'SI') ||
+        (u === 'imperial' && b.textContent.trim() === 'UK/US')) {
+      b.classList.add('active');
+    }
+  });
   updateAmounts();
 }
 
@@ -1058,6 +1160,7 @@ function goToStep(idx) {
 
 function renderStep() {
   stopTimer();
+  const STEPS = getSteps();
   const total = STEPS.length;
   const step = STEPS[currentStep];
 
@@ -1113,7 +1216,7 @@ function renderStep() {
         <div class="step-title">${step.title}</div>
       </div>
       <div class="step-body">
-        <p class="step-text">${step.text}</p>
+        <p class="step-text">${step.text()}</p>
         ${timerHTML}
         ${scienceHTML}
         ${tipHTML}
@@ -1126,7 +1229,7 @@ function renderStep() {
 }
 
 function nextStep() {
-  if (currentStep < STEPS.length - 1) {
+  if (currentStep < getSteps().length - 1) {
     currentStep++;
     renderStep();
   }
@@ -1141,7 +1244,7 @@ function prevStep() {
 
 function finishCooking() {
   stopTimer();
-  document.getElementById('step-progress').innerHTML = Array(STEPS.length).fill('<div class="step-dot done"></div>').join('');
+  document.getElementById('step-progress').innerHTML = Array(getSteps().length).fill('<div class="step-dot done"></div>').join('');
   document.getElementById('step-container').innerHTML = `
     <div class="completion">
       <div class="completion-icon">🍲</div>
@@ -1190,7 +1293,26 @@ function updateTimerDisplay() {
   if (el) el.textContent = m + ':' + s.toString().padStart(2,'0');
 }
 
+// ===== FONT SIZE =====
+function setFontSize(size) {
+  const html = document.documentElement;
+  html.classList.remove('text-md', 'text-lg');
+  if (size === 'm') html.classList.add('text-md');
+  if (size === 'l') html.classList.add('text-lg');
+  document.querySelectorAll('.fs-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('fs-' + size).classList.add('active');
+  // Zachowaj wybór w sessionStorage
+  sessionStorage.setItem('zurFontSize', size);
+  // Jeśli jesteśmy w trybie gotowania — przerysuj krok
+  if (document.getElementById('section-gotowanie').classList.contains('active')) {
+    renderStep();
+  }
+}
+
 // ===== INIT =====
+// Przywróć rozmiar czcionki jeśli był zapisany
+const savedSize = sessionStorage.getItem('zurFontSize');
+if (savedSize) setFontSize(savedSize);
 updateAmounts();
 </script>
 </body>
