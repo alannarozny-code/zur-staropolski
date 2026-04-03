@@ -1699,15 +1699,13 @@ updateYield();
     <div class="music-label">🎵 Wiedźmin 3 — muzyka w tle</div>
     <iframe
       id="spotify-iframe"
-      src=""
-      data-src="https://open.spotify.com/embed/album/6pYNEn4tMc6gdv5fIZf5yn?utm_source=generator&theme=0"
+      src="https://open.spotify.com/embed/album/6pYNEn4tMc6gdv5fIZf5yn?utm_source=generator&theme=0"
       width="300"
       height="152"
       frameBorder="0"
       allowfullscreen=""
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-      style="display:block;">
+      style="display:block; border-radius: 0 0 0.75rem 0.75rem;">
     </iframe>
   </div>
   <button class="music-toggle" id="music-toggle" onclick="toggleMusic()" title="Muzyka w tle">
@@ -1720,11 +1718,7 @@ updateYield();
 <script>
 function toggleMusic() {
   const panel = document.getElementById('music-panel');
-  const iframe = document.getElementById('spotify-iframe');
   const isOpen = panel.classList.toggle('open');
-  if (isOpen && !iframe.src) {
-    iframe.src = iframe.dataset.src;
-  }
   document.getElementById('music-toggle').title = isOpen ? 'Zamknij odtwarzacz' : 'Muzyka w tle';
 }
 </script>
